@@ -28,3 +28,18 @@ pub fn create(resource_dto_json: Json<ResourceDTO>) ->  Result<
         ),
     }
 }
+
+#[put("/resources/<id>", data = "<resource_dto_json>")]
+pub fn update(id: u32, resource_dto_json: Json<ResourceDTO>) ->  Result<
+    status::Custom<Json<Resource>>,
+    status::Custom<Json<ErrorJson>>
+> {
+    let resource = resource_dto_json.into_inner();
+
+    match resource_service::update_resource(id, resource) {
+        Ok(resource) => Ok(status::Custom(Status::Created, Json(resource))),
+        Err(err) => Err(
+            status::Custom(Status::BadRequest, Json(ErrorJson { message: err }))
+        ),
+    }
+}

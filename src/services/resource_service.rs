@@ -40,3 +40,21 @@ pub fn create_resource(resource_dto: ResourceDTO) -> Result<Resource, String> {
         Err("Error creating resource".to_string())
     }
 }
+
+pub fn update_resource(id: u32, resource_dto: ResourceDTO) -> Result<Resource, String> {
+    let resource = Resource {
+        id,
+        title: resource_dto.title,
+        description: resource_dto.description,
+    };
+    // Use repository to save it on db
+    println!("ID: {}", resource.id);
+    println!("TITLE: {}", resource.title);
+    println!("DESCRIPTION: {}", resource.description);
+
+    if resource.id > 0 {
+        Ok(resource)
+    } else {
+        Err("Error creating resource".to_string())
+    }
+}

@@ -13,6 +13,7 @@ async fn rocket() -> _ {
         home_controller::index,
         resource_controller::index,
         resource_controller::create,
+        resource_controller::update,
     ])
 }
 
