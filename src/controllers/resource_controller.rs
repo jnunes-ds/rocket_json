@@ -37,7 +37,7 @@ pub fn update(id: u32, resource_dto_json: Json<ResourceDTO>) ->  Result<
     let resource = resource_dto_json.into_inner();
 
     match resource_service::update_resource(id, resource) {
-        Ok(resource) => Ok(status::Custom(Status::Created, Json(resource))),
+        Ok(resource) => Ok(status::Custom(Status::Ok, Json(resource))),
         Err(err) => Err(
             status::Custom(Status::BadRequest, Json(ErrorJson { message: err }))
         ),
