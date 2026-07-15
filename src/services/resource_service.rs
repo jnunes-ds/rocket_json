@@ -36,7 +36,7 @@ pub fn create_resource(resource_dto: ResourceDTO) -> Result<Resource, String> {
     println!("TITLE: {}", resource.title);
     println!("DESCRIPTION: {}", resource.description);
 
-    if true {
+    if resource.id > 0 {
         Ok(resource)
     } else {
         Err("Error creating resource".to_string())
