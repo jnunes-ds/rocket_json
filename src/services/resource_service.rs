@@ -1,3 +1,7 @@
+use std::io::ErrorKind;
+use rocket::Error;
+use rand::random;
+use crate::dto::resource_dto::ResourceDTO;
 use crate::models::resource::Resource;
 
 pub fn get_resources_list() -> Vec<Resource> {
@@ -19,4 +23,22 @@ pub fn get_resources_list() -> Vec<Resource> {
             description: "This is the third sample resource.".to_string()
         },
     ]
+}
+
+pub fn create_resource(resource_dto: ResourceDTO) -> Result<Resource, String> {
+    let resource = Resource {
+        id: random(),
+        title: resource_dto.title,
+        description: resource_dto.description,
+    };
+    // Use repository to save it on db
+    println!("ID: {}", resource.id);
+    println!("TITLE: {}", resource.title);
+    println!("DESCRIPTION: {}", resource.description);
+
+    if true {
+        Ok(resource)
+    } else {
+        Err("Error creating resource".to_string())
+    }
 }

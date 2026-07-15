@@ -7,7 +7,7 @@ pub fn index() -> Json<Home> {
         Home {
             message: "Welcome to the home page".to_string(),
             endpoints: vec![
-                "/resource".to_string(),
+                "/resources".to_string(),
             ]
         }
     )
