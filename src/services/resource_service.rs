@@ -1,4 +1,5 @@
 use rand::random;
+use rocket::Error;
 use crate::dto::resource_dto::ResourceDTO;
 use crate::models::resource::Resource;
 
@@ -56,5 +57,21 @@ pub fn update_resource(id: u32, resource_dto: ResourceDTO) -> Result<Resource, S
         Ok(resource)
     } else {
         Err("Error creating resource".to_string())
+    }
+}
+
+pub fn get_resource_by_id(id: u32) -> Result<Resource, String> {
+    // Getting from database
+    let resourses = get_resources_list();
+
+    match resourses.iter().find(|r| r.id == id) {
+        Some(r) => Ok(Resource {
+            id: r.id,
+            title: r.title.clone(),
+            description: r.description.clone()
+        }),
+        None => {
+            return Err("Não foi possível encontrar o recurso".to_string())
+        }
     }
 }

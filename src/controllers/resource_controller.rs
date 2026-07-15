@@ -43,3 +43,17 @@ pub fn update(id: u32, resource_dto_json: Json<ResourceDTO>) ->  Result<
         ),
     }
 }
+
+#[get("/resources/<id>")]
+pub fn get_by_id(id: u32) ->  Result<
+    status::Custom<Json<Resource>>,
+    status::Custom<Json<ErrorJson>>
+> {
+
+    match resource_service::get_resource_by_id(id) {
+        Ok(resource) => Ok(status::Custom(Status::Ok, Json(resource))),
+        Err(err) => Err(
+            status::Custom(Status::BadRequest, Json(ErrorJson { message: err }))
+        ),
+    }
+}
