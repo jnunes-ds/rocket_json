@@ -1,0 +1,13 @@
+### GET
+GET http://127.0.0.1:8000/resources/
+
+
+### POST
+POST http://127.0.0.1:8000/resources
+Content-Type: application/json
+
+{
+  "title": "Exemplo de Título",
+  "description": "Exemplo de Descrição"
+}
+
