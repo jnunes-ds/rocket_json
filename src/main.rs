@@ -1,3 +1,5 @@
+mod controllers;
+
 #[macro_use] extern crate rocket;
 
 use rocket::{Build, Rocket};
@@ -32,7 +34,7 @@ fn home() -> Json<Home> {
 
 #[get("/resource")]
 fn resource_index() -> Json<Vec<Resource>> {
-    let resourses = vec![
+    let resources = vec![
         Resource {
             id: 1,
             title: "Sample Resource 1".to_string(),
@@ -50,7 +52,7 @@ fn resource_index() -> Json<Vec<Resource>> {
         },
     ];
 
-    Json(resourses)
+    Json(resources)
 }
 
 #[launch]
