@@ -22,3 +22,6 @@ Content-Type: application/json
 
 ### GET by id
 GET http://127.0.0.1:8000/resources/1
+
+### DELETE by id
+DELETE http://127.0.0.1:8000/resources/1
