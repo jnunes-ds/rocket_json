@@ -71,7 +71,21 @@ pub fn get_resource_by_id(id: u32) -> Result<Resource, String> {
             description: r.description.clone()
         }),
         None => {
-            return Err("Não foi possível encontrar o recurso".to_string())
+            Err("Não foi possível encontrar o recurso".to_string())
+        }
+    }
+}
+
+pub fn delete_resource_by_id(id: u32) -> Result<(), String> {
+    // Getting from database
+    let resourses = get_resources_list();
+
+    match resourses.iter().find(|r| r.id == id) {
+        Some(r) => {
+            Ok(()) 
+        },
+        None => {
+            Err(format!("O recurso {} remover não existe", id))
         }
     }
 }

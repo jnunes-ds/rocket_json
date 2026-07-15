@@ -53,7 +53,21 @@ pub fn get_by_id(id: u32) ->  Result<
     match resource_service::get_resource_by_id(id) {
         Ok(resource) => Ok(status::Custom(Status::Ok, Json(resource))),
         Err(err) => Err(
-            status::Custom(Status::BadRequest, Json(ErrorJson { message: err }))
+            status::Custom(Status::NotFound, Json(ErrorJson { message: err }))
+        ),
+    }
+}
+
+#[delete("/resources/<id>")]
+pub fn delete_by_id(id: u32) ->  Result<
+    status::Custom<Json<()>>,
+    status::Custom<Json<ErrorJson>>
+> {
+
+    match resource_service::delete_resource_by_id(id) {
+        Ok(resource) => Ok(status::Custom(Status::Ok, Json(()))),
+        Err(err) => Err(
+            status::Custom(Status::NotFound, Json(ErrorJson { message: err }))
         ),
     }
 }

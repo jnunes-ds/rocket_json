@@ -15,6 +15,7 @@ async fn rocket() -> _ {
         resource_controller::create,
         resource_controller::update,
         resource_controller::get_by_id,
+        resource_controller::delete_by_id,
     ])
 }
 
