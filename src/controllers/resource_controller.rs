@@ -2,7 +2,7 @@ use rocket::serde::json::Json;
 use crate::models::resource::Resource;
 
 #[get("/resource")]
-pub fn resource_index() -> Json<Vec<Resource>> {
+pub fn index() -> Json<Vec<Resource>> {
     let resources = vec![
         Resource {
             id: 1,
