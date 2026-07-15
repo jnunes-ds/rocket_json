@@ -1,5 +1,5 @@
 ### GET
-GET http://127.0.0.1:8000/resources/
+GET http://127.0.0.1:8000/resources
 
 
 ### POST
@@ -11,3 +11,11 @@ Content-Type: application/json
   "description": "Exemplo de Descrição"
 }
 
+### PUT
+PUT http://127.0.0.1:8000/resources/1
+Content-Type: application/json
+
+{
+  "title": "Novo exemplo de título",
+  "description": "Novo exemplo de descrição"
+}
