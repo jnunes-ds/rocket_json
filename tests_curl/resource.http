@@ -1,10 +1,12 @@
 ### GET
 GET http://127.0.0.1:8000/resources
+Authorization: Bearer {{ROCKET_SECRET_KEY}}
 
 
 ### POST
 POST http://127.0.0.1:8000/resources
 Content-Type: application/json
+Authorization: Bearer {{ROCKET_SECRET_KEY}}
 
 {
   "title": "Exemplo de Título",
@@ -14,6 +16,7 @@ Content-Type: application/json
 ### PUT
 PUT http://127.0.0.1:8000/resources/1
 Content-Type: application/json
+Authorization: Bearer {{ROCKET_SECRET_KEY}}
 
 {
   "title": "Novo exemplo de título",
@@ -22,6 +25,8 @@ Content-Type: application/json
 
 ### GET by id
 GET http://127.0.0.1:8000/resources/1
+Authorization: Bearer {{ROCKET_SECRET_KEY}}
 
 ### DELETE by id
 DELETE http://127.0.0.1:8000/resources/1
+Authorization: Bearer {{ROCKET_SECRET_KEY}}
