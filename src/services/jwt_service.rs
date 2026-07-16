@@ -1,3 +1,5 @@
+use std::env;
+use std::string::ToString;
 use rocket::serde::{Deserialize, Serialize};
 use chrono::{Duration, Utc};
 use jsonwebtoken::{EncodingKey, Header, decode, encode, DecodingKey, Validation};
@@ -8,7 +10,7 @@ struct Claims {
     exp: usize,
 }
 
-const SECRET_KEY: &str = "your_secret_key";
+const SECRET_KEY: &str = "ROCKET_SECRET_KEY";
 
 pub fn generate_jwt_token(admin_id: u32) -> String {
     let expiration_time = Utc::now()
@@ -21,17 +23,23 @@ pub fn generate_jwt_token(admin_id: u32) -> String {
         exp: expiration_time as usize,
     };
 
+    let secret_key = env::var(SECRET_KEY)
+        .unwrap_or_else(|_| "your_secret_key".to_string());
+
     encode(
-        &Header::default(), 
-        &claims, 
-        &EncodingKey::from_secret(SECRET_KEY.as_ref())
+        &Header::default(),
+        &claims,
+        &EncodingKey::from_secret(secret_key.as_ref())
     ).unwrap()
 }
 
 pub fn verify_token(token: &str) -> bool {
+    let secret_key = env::var(SECRET_KEY)
+        .unwrap_or_else(|_| "your_secret_key".to_string());
+    
     decode::<Claims>(
         token,
-        &DecodingKey::from_secret(SECRET_KEY.as_ref()),
+        &DecodingKey::from_secret(secret_key.as_ref()),
         &Validation::default()
     ).is_ok()
 }
