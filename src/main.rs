@@ -5,12 +5,13 @@ mod services;
 mod dto;
 
 #[macro_use] extern crate rocket;
-use controllers::{home_controller, resource_controller};
+use controllers::{ home_controller, resource_controller, login_controller };
 
 #[launch]
 async fn rocket() -> _ {
     rocket::build().mount("/", routes![
         home_controller::index,
+        login_controller::login,
         resource_controller::index,
         resource_controller::create,
         resource_controller::update,
