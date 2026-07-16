@@ -1,4 +1,7 @@
+use rocket::http::Status;
+use rocket::response::status;
 use rocket::serde::json::Json;
+use crate::model_views::error_json::ErrorJson;
 use crate::model_views::home::Home;
 
 #[get("/")]
@@ -11,4 +14,11 @@ pub fn index() -> Json<Home> {
             ]
         }
     )
+}
+
+#[get("/unauthorized")]
+pub fn unauthorized() -> status::Custom<Json<ErrorJson>> {
+    status::Custom(Status::Unauthorized, Json(ErrorJson {
+        message: "You are not authorized to access this resource".to_string()
+    }))
 }
